@@ -1,6 +1,4 @@
-/**
- * Created by praneethkumar on 28/07/16.
- */
+
 'use strict';
 
 angular.module('ngSocial.facebook', ['ngRoute', 'ngFacebook'])
@@ -13,7 +11,7 @@ angular.module('ngSocial.facebook', ['ngRoute', 'ngFacebook'])
     }])
 
     .config(function ($facebookProvider) {
-        $facebookProvider.setAppId('1148847478491012');
+        $facebookProvider.setAppId('YOUR_FACEBOOK_KEY');
         $facebookProvider.setPermissions('email', 'public_profile', 'user_posts', 'publish_actions', 'user_photos');
     })
 
@@ -27,6 +25,11 @@ angular.module('ngSocial.facebook', ['ngRoute', 'ngFacebook'])
         }(document, 'script', 'facebook-jssdk'));
     })
     
-    .controller('FacebookCtrl', [function() {
-
+    .controller('facebookCtrl', [ '$scope','$facebook',function($scope, $facebook) {
+        $scope.isLoggedIn = false;
+        $scope.login = function () {
+            $facebook.login().then(function () {
+                console.log('LOGGED IN');
+            });
+        }
     }]);
